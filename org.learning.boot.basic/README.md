@@ -38,3 +38,12 @@ Phase 3:
 - For creating requests like POST, PUT, DELETE, you can use following:	
   - postman
   - REST Client: a vscode extension, save file with .http extension and then make calls. Refer to test.http file in the same folder
+
+Phase 4:
+- Add test cases for UserController and HelloController
+- Once you create spring project, a class will be generated under src/test/java
+- @SpringBootTest: Indicates that this class will be used to writing test cases
+- @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT): Indicates that port can be random for running test cases
+- @Test: Any method containing this annotation will be considered as test
+- @LocalServerPort: random port on which http calls for testing will be made. Usage: private int port;
+- private TestRestTemplate restTemplate; for making http API calls 

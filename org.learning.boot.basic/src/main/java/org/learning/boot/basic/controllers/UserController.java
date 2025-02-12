@@ -48,8 +48,13 @@ public class UserController {
 	 * @param users
 	 */
 	@PostMapping("/users")
-	public void addUser(@RequestBody Users users) { // This RequestBody will contains user data (in JSON form)
-		userService.createUser(users);
+	public ResponseEntity<Users> addUser(@RequestBody Users user) {
+	    try {
+	        Users createdUser = userService.createUser(user);
+	        return ResponseEntity.ok(createdUser);  // Returns 200 with created user
+	    } catch (Exception e) {
+	        return ResponseEntity.badRequest().build();  // Returns 400 if something goes wrong
+	    }
 	}
 	
 	@PutMapping("/users/{id}")
