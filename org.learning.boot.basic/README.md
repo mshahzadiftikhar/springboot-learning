@@ -47,3 +47,13 @@ Phase 4:
 - @Test: Any method containing this annotation will be considered as test
 - @LocalServerPort: random port on which http calls for testing will be made. Usage: private int port;
 - private TestRestTemplate restTemplate; for making http API calls 
+
+Phase 5:
+- This phase adds Swagger dependency. Swagger is used for documentation of APIs. User can test endpoints from the browser.
+- Add springdoc-openapi-starter-webmvc-ui dependency in pom.xml file
+- Swagger UI will be automatically available at: http://localhost:8080/swagger-ui.html
+- @Tag: used to categorize and group related API endpoints in Swagger
+  - @Tag(name = "User Management", description = "APIs for managing users") 
+- @Operation: For summary of endpints
+  - @Operation(summary = "Get User by ID", description = "Fetch a user using their unique ID")
+- To disable Swagger in production, add: springdoc.api-docs.enabled=false

@@ -18,7 +18,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
+
+// used to categorize and group related API endpoints within the Swagger UI documentation.
+@Tag(name = "User Management", description = "APIs for managing users")
 public class UserController {
 
 	@Autowired
@@ -30,6 +36,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/users/{id}")
+	@Operation(summary = "Get User by ID", description = "Fetch a user using their unique ID") // Swagger
 	public ResponseEntity<?> getUserByID(@PathVariable Long id) {
 		Optional<Users> op =  userService.getUserById(id);
 		if (op.isPresent()) {
