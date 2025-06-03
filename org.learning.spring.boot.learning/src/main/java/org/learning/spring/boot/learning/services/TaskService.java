@@ -1,11 +1,23 @@
 package org.learning.spring.boot.learning.services;
 
+import java.util.List;
+
+import org.learning.spring.boot.learning.jpa.Task;
+import org.learning.spring.boot.learning.jpa.TaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TaskService {
 
+	@Autowired
+	private TaskRepository taskRepository;
+	
 	public String getHelloWorld() {
 		return "Hello World";
 	}
+	
+	public List<Task> getAllTasks() {
+		return taskRepository.findAll();
+	}	
 }

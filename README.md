@@ -57,3 +57,8 @@ All http requests are handled by the controllers. Service acts as a layer betwee
    ```
    `@Autowired`: It tells Spring to automatically inject a required bean (object) into a class.
  - Now  you should see _Hello World_ if you run following URL: localhost:8080/hello
+
+ ## Integrating H2 Database
+
+ H2 is in memory database that is useful for testing purpose. We will be using Java persistent APIs (JPA), where we can map java objects to database tables.   
+ For details, see this page: [H2 Database Integration](./docs/h2-database-integration.md)
