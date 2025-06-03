@@ -28,3 +28,32 @@ Follow these steps for creating a new spring project:
 5. By default, the Spring Boot application starts with an embedded Tomcat server on `localhost:8080`.
 
 ---
+## Controller & Services
+
+All http requests are handled by the controllers. Service acts as a layer between the Controller and the data source (e.g., database), encapsulating business logic and reusable operations.
+ - All service classes should be annotated with `@Service`
+   ```
+   @Service
+   public class TaskService {
+
+      public String getHelloWorld() {
+         return "Hello World";
+      }
+   }
+   ```
+   For now, we aren't fetching data from any database. Just returning the hardcoded string to see how overall things works. 
+ - All Controller classes should be annotated with `@RestController`
+   ```
+   @RestController
+   public class TaskController {
+      @Autowired
+      TaskService taskService;
+      
+      @GetMapping("/hello")
+      public String getHelloWorld() {
+         return taskService.getHelloWorld();
+      }
+   }
+   ```
+   `@Autowired`: It tells Spring to automatically inject a required bean (object) into a class.
+ - Now  you should see _Hello World_ if you run following URL: localhost:8080/hello
