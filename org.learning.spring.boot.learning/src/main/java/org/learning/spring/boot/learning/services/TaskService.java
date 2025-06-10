@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.learning.spring.boot.learning.dto.CreateTaskDTO;
+import org.learning.spring.boot.learning.dto.PatchTaskDTO;
 import org.learning.spring.boot.learning.dto.PutTaskDTO;
 import org.learning.spring.boot.learning.jpa.Task;
 import org.learning.spring.boot.learning.jpa.TaskRepository;
@@ -53,4 +54,21 @@ public class TaskService {
     
         return task;
     }
+	
+	public Optional<Task> patchTask(int id, PatchTaskDTO dto) {
+		Optional<Task> task = taskRepository.findById(id);
+
+		if (task.isPresent()) {
+			if (dto.getName() != null) {
+				task.get().setName(dto.getName());
+			}
+			if (dto.getDescription() != null) {
+				task.get().setDescription(dto.getDescription());
+			}
+			
+			taskRepository.save(task.get());
+		}
+
+		return task;
+	}
 }

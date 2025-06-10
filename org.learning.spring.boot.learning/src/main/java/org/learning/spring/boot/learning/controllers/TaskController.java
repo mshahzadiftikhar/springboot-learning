@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.learning.spring.boot.learning.dto.CreateTaskDTO;
+import org.learning.spring.boot.learning.dto.PatchTaskDTO;
 import org.learning.spring.boot.learning.dto.PutTaskDTO;
 import org.learning.spring.boot.learning.dto.ResponseTaskDTO;
 import org.learning.spring.boot.learning.jpa.Task;
@@ -11,6 +12,7 @@ import org.learning.spring.boot.learning.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -56,5 +58,10 @@ public class TaskController {
 	@PutMapping("/{id}")
 	public Optional<Task> updateTask(@PathVariable int id, @RequestBody @Valid PutTaskDTO dto) {
 		return taskService.updateTask(id, dto);
+	}
+	
+	@PatchMapping("/{id}")
+	public Optional<Task> patchTask(@PathVariable int id, @RequestBody @Valid PatchTaskDTO dto) {
+		return taskService.patchTask(id, dto);
 	}
 }

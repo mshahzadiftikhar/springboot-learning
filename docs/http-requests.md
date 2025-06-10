@@ -54,7 +54,7 @@
      - `@PostMapping`: Maps HTTP POST requests to this method. Commonly used for creating new resources
      - `@RequestBody`: Binds the incoming JSON request body to a Java object (e.g., `TaskCreateDTO`)
 
-### Delete
+### DELETE
 - Create method in service
     ```
     public Optional<Task> deleteTaskById(int id) {
@@ -111,3 +111,35 @@
     - `@Valid`  
       Triggers validation on the DTO fields using annotations like `@NotEmpty`.
       
+### PATCH
+
+Patch is very similar to PUT, for patch we need to use `@PatchMapping` annottaion and use a DTO that don't put constraints on name and desciption of the task.
+ - Create DTO: [PatchTaskDTO](../org.learning.spring.boot.learning/src/main/java/org/learning/spring/boot/learning/dto/PatchTaskDTO.java)
+ - Add method in service
+    ```
+    public Optional<Task> patchTask(int id, PatchTaskDTO dto) {
+		Optional<Task> task = taskRepository.findById(id);
+
+		if (task.isPresent()) {
+			if (dto.getName() != null) {
+				task.get().setName(dto.getName());
+			}
+			if (dto.getDescription() != null) {
+				task.get().setDescription(dto.getDescription());
+			}
+			
+			taskRepository.save(task.get());
+		}
+
+		return task;
+	}
+    ```
+ - Add methiod in Controller
+    ```
+    @PatchMapping("/{id}")
+	public Optional<Task> patchTask(@PathVariable int id, @RequestBody @Valid PatchTaskDTO dto) {
+		return taskService.patchTask(id, dto);
+	}
+    ```
+ - Annotations:
+    - `@PatchMapping`: Maps HTTP PATCH requests. Used for partial updates to a resource.
