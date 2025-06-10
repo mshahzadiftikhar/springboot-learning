@@ -10,6 +10,7 @@ import org.learning.spring.boot.learning.dto.ResponseTaskDTO;
 import org.learning.spring.boot.learning.jpa.Task;
 import org.learning.spring.boot.learning.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -51,9 +52,17 @@ public class TaskController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public Optional<Task> deleteById(@PathVariable int id) {
-		return taskService.deleteTaskById(id);
+	public ResponseEntity<ResponseTaskDTO> deleteById(@PathVariable int id) {
+	    Optional<Task> task = taskService.deleteTaskById(id);
+	    if (task.isPresent()) {
+	        Task deleted = task.get();
+	        ResponseTaskDTO dto = new ResponseTaskDTO(deleted.getId(), deleted.getName());
+	        return ResponseEntity.ok(dto);
+	    } else {
+	        return ResponseEntity.notFound().build();
+	    }
 	}
+
 	
 	@PutMapping("/{id}")
 	public Optional<Task> updateTask(@PathVariable int id, @RequestBody @Valid PutTaskDTO dto) {
