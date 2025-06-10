@@ -27,3 +27,29 @@
     - `@GetMapping`	Maps HTTP GET requests to this method  
     - `@PathVariable`	Extracts values from URL path (e.g., /tasks/5)
     - `RequestMapping` If specified at controller level, all incoming requests are mapped to that path. Lets say we are using @RequestMapping("tasks"), then all mapping in the controller will be prepended with tasks. Like  @GetMapping("allTasks") is actually  @GetMapping("tasks/allTasks"). RequestMapping annotation can be method specific as well. See details [here](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html).
+
+### POST
+ - Create DTOs:  
+ [CreateTaskDTO](../org.learning.spring.boot.learning/src/main/java/org/learning/spring/boot/learning/dto/CreateTaskDTO.java)  
+ [ResponseTaskDTO](../org.learning.spring.boot.learning/src/main/java/org/learning/spring/boot/learning/dto/ResponseTaskDTO.java)
+  - Create method in service
+    ```
+        public Task create(CreateTaskDTO dto) {
+            Task task = new Task();
+            task.setName(dto.getName());
+            task.setDescription(dto.getDescription());
+            return taskRepository.save(task);   
+        }
+    ```
+  - Create method in controller
+    ```
+        @PostMapping("create")
+        public ResponseTaskDTO createTask(@RequestBody CreateTaskDTO dto) {
+            Task task = taskService.create(dto);
+            ResponseTaskDTO response = new ResponseTaskDTO(task.getId(), task.getName());
+            return response;
+        }
+    ```
+- Annotations:
+     - `@PostMapping`: Maps HTTP POST requests to this method. Commonly used for creating new resources
+     - `@RequestBody`: Binds the incoming JSON request body to a Java object (e.g., `TaskCreateDTO`)
