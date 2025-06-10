@@ -8,6 +8,7 @@ import org.learning.spring.boot.learning.dto.ResponseTaskDTO;
 import org.learning.spring.boot.learning.jpa.Task;
 import org.learning.spring.boot.learning.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,5 +43,9 @@ public class TaskController {
 		ResponseTaskDTO response = new ResponseTaskDTO(task.getId(), task.getName());
 		return response;
 	}
-
+	
+	@DeleteMapping("/{id}")
+	public Optional<Task> deleteById(@PathVariable int id) {
+		return taskService.deleteTaskById(id);
+	}
 }

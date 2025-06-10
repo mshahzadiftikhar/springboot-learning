@@ -33,4 +33,13 @@ public class TaskService {
 	    task.setDescription(dto.getDescription());
 	    return taskRepository.save(task);
 	}
+	
+	public Optional<Task> deleteTaskById(int id) {
+        Optional<Task> task = taskRepository.findById(id);
+        if (task.isPresent()) {
+        	taskRepository.delete(task.get());
+        }
+        
+        return task;
+    }
 }

@@ -53,3 +53,25 @@
 - Annotations:
      - `@PostMapping`: Maps HTTP POST requests to this method. Commonly used for creating new resources
      - `@RequestBody`: Binds the incoming JSON request body to a Java object (e.g., `TaskCreateDTO`)
+
+### Delete
+- Create method in service
+    ```
+    public Optional<Task> deleteTaskById(int id) {
+        Optional<Task> task = taskRepository.findById(id);
+        if (task.isPresent()) {
+        	taskRepository.delete(task.get());
+        }
+        
+        return task;
+    }
+    ```
+- Create method in controller
+    ```
+    @DeleteMapping("/{id}")
+	public Optional<Task> deleteById(@PathVariable int id) {
+		return taskService.deleteTaskById(id);
+	}
+    ```
+- Annotations:
+     - `@DeleteMapping`: Maps HTTP DELET requests to this method.
