@@ -62,3 +62,7 @@ All http requests are handled by the controllers. Service acts as a layer betwee
 
  H2 is in memory database that is useful for testing purpose. We will be using Java persistent APIs (JPA), where we can map java objects to database tables.   
  For details, see this page: [H2 Database Integration](./docs/h2-database-integration.md)
+
+ ## HTTP Requests
+
+ Lets looks at details of each HTTP Request: GET, POST, DELETE, PUT, PATCH: [HTTP Requests](./docs/http-requests.md)

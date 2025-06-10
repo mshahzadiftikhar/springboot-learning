@@ -1,6 +1,7 @@
 package org.learning.spring.boot.learning.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.learning.spring.boot.learning.jpa.Task;
 import org.learning.spring.boot.learning.jpa.TaskRepository;
@@ -19,5 +20,9 @@ public class TaskService {
 	
 	public List<Task> getAllTasks() {
 		return taskRepository.findAll();
-	}	
+	}
+	
+	public Optional<Task> getTaskById(int id) {
+		return taskRepository.findById(id);	
+	}
 }
