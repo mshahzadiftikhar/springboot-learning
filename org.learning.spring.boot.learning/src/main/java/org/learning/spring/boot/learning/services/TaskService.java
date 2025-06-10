@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.learning.spring.boot.learning.dto.CreateTaskDTO;
+import org.learning.spring.boot.learning.dto.PutTaskDTO;
 import org.learning.spring.boot.learning.jpa.Task;
 import org.learning.spring.boot.learning.jpa.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,16 @@ public class TaskService {
         	taskRepository.delete(task.get());
         }
         
+        return task;
+    }
+	
+	public Optional<Task> updateTask(int id, PutTaskDTO dto) {
+        Optional<Task> task = taskRepository.findById(id);
+        if (task.isPresent()) {
+        	task.get().setName(dto.getName());
+            task.get().setDescription(dto.getDescription());
+        }
+    
         return task;
     }
 }

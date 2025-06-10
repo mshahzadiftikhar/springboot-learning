@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.learning.spring.boot.learning.dto.CreateTaskDTO;
+import org.learning.spring.boot.learning.dto.PutTaskDTO;
 import org.learning.spring.boot.learning.dto.ResponseTaskDTO;
 import org.learning.spring.boot.learning.jpa.Task;
 import org.learning.spring.boot.learning.services.TaskService;
@@ -12,9 +13,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("tasks")
@@ -47,5 +51,10 @@ public class TaskController {
 	@DeleteMapping("/{id}")
 	public Optional<Task> deleteById(@PathVariable int id) {
 		return taskService.deleteTaskById(id);
+	}
+	
+	@PutMapping("/{id}")
+	public Optional<Task> updateTask(@PathVariable int id, @RequestBody @Valid PutTaskDTO dto) {
+		return taskService.updateTask(id, dto);
 	}
 }

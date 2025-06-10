@@ -75,3 +75,39 @@
     ```
 - Annotations:
      - `@DeleteMapping`: Maps HTTP DELET requests to this method.
+
+### PUT 
+ - Add dependency for validation
+    ```
+    <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    ```
+ - Add DTO containg validatios: [PutTaskDTO](../org.learning.spring.boot.learning/src/main/java/org/learning/spring/boot/learning/dto/PutTaskDTO.java)
+ - Add method in service
+    ```
+    public Optional<Task> updateTask(int id, PutTaskDTO dto) {
+        Optional<Task> task = taskRepository.findById(id);
+        if (task.isPresent()) {
+        	task.get().setName(dto.getName());
+            task.get().setDescription(dto.getDescription());
+        }
+    
+        return task;
+    }
+    ```
+ - Add method in controller
+    ```
+    @PutMapping("/{id}")
+	public Optional<Task> updateTask(@PathVariable int id, @RequestBody @Valid PutTaskDTO dto) {
+		return taskService.updateTask(id, dto);
+	}
+    ```
+ - Annotations:
+   - `@PutMapping`  
+      Maps HTTP PUT requests. Used to **replace** an existing resource completely.
+
+    - `@Valid`  
+      Triggers validation on the DTO fields using annotations like `@NotEmpty`.
+      
