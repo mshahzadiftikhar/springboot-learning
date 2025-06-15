@@ -66,3 +66,38 @@ All http requests are handled by the controllers. Service acts as a layer betwee
  ## HTTP Requests
 
  Lets looks at details of each HTTP Request: GET, POST, DELETE, PUT, PATCH: [HTTP Requests](./docs/http-requests.md)
+
+ ## Spring Boot Actuator
+
+Spring Boot Actuator provides production-ready features to help you monitor and manage your application via REST endpoints.
+
+ - Add the following dependency in your `pom.xml`:
+
+   ```
+   <dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-actuator</artifactId>
+   </dependency>
+   ```
+ - By default very limited number of endpoints like `/actuator/health` are available. You can enable all or specific in .properties file.
+   ```
+   # Expose specific endpoints
+   management.endpoints.web.exposure.include=health,info,metrics
+
+   # To expose all endpoints (for development only)
+   management.endpoints.web.exposure.include=*
+
+   # Show detailed health info
+   management.endpoint.health.show-details=always
+   ```
+ - Some common endpoints  
+
+   | Endpoint             | Description                                  |
+   | -------------------- | -------------------------------------------- |
+   | `/actuator/health`   | Application health status                    |
+   | `/actuator/info`     | Custom info like app version or author       |
+   | `/actuator/metrics`  | Performance metrics like memory, CPU, etc.   |
+   | `/actuator/env`      | All environment properties and config values |
+   | `/actuator/beans`    | List of Spring beans in the app              |
+   | `/actuator/mappings` | All HTTP endpoint mappings                   |
+   | `/actuator/loggers`  | View or modify logging levels at runtime     |
