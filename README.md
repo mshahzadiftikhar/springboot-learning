@@ -125,3 +125,26 @@ Swagger helps you document, visualize, and test your REST APIs through an intera
    ```
    springdoc.api-docs.enabled=false
    ```
+
+## Exception Handling
+
+ - Local Exception Handling:
+   Exception handling can be performed inside controller
+      - Create [TaskNotFoundException](org.learning.spring.boot.learning/src/main/java/org/learning/spring/boot/learning/exceptions/TaskNotFoundException.java) class, which extends from RuntimeException and simply prints the message being passed. 
+      - Add Method in controller which accepts exception handling and returen response as ResponseEntity
+         ```
+         @ExceptionHandler(TaskNotFoundException.class)
+         public ResponseEntity<String> handleTaskNotFound(TaskNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+         }
+         ``` 
+      - Throw exception from http method if id is not found
+         ```
+         public Task getTaskById(@PathVariable int id) {
+            return taskService.getTaskById(id).orElseThrow(() -> new TaskNotFoundException("Task with ID " + id + " not found"));
+         }
+         ```
+- Global Exception Handling  
+   - Create a class for global exception handling: [GlobalExceptionHandler](org.learning.spring.boot.learning/src/main/java/org/learning/spring/boot/learning/exceptions/GlobalExceptionHandler.java)
+    - `@ControllerAdvice` annotation defines that this class is global exception
+    - Its a more cleaner way to group all exception handling at one place

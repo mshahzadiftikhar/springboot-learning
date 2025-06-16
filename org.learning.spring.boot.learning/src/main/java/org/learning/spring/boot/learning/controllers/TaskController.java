@@ -7,12 +7,16 @@ import org.learning.spring.boot.learning.dto.CreateTaskDTO;
 import org.learning.spring.boot.learning.dto.PatchTaskDTO;
 import org.learning.spring.boot.learning.dto.PutTaskDTO;
 import org.learning.spring.boot.learning.dto.ResponseTaskDTO;
+import org.learning.spring.boot.learning.exceptions.ResourceNotFoundException;
+import org.learning.spring.boot.learning.exceptions.TaskNotFoundException;
 import org.learning.spring.boot.learning.jpa.Task;
 import org.learning.spring.boot.learning.services.TaskService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("tasks")
@@ -49,8 +54,8 @@ public class TaskController {
 
 	@GetMapping("/{id}")
 	@Operation(summary = "Get task by ID", description = "Returns a task by its ID")
-	public Optional<Task> getTaskById(@PathVariable int id) {
-		return taskService.getTaskById(id);
+	public Task getTaskById(@PathVariable int id) {
+		return taskService.getTaskById(id).orElseThrow(() -> new TaskNotFoundException("Task with ID " + id + " not found"));
 	}
 
 	@PostMapping("create")
@@ -79,7 +84,12 @@ public class TaskController {
 	}
 	
 	@PatchMapping("/{id}")
-	public Optional<Task> patchTask(@PathVariable int id, @RequestBody @Valid PatchTaskDTO dto) {
-		return taskService.patchTask(id, dto);
+	public Task patchTask(@PathVariable int id, @RequestBody @Valid PatchTaskDTO dto) {
+		return taskService.patchTask(id, dto).orElseThrow(() -> new RuntimeException("Task with ID " + id + " not found"));
 	}
+
+	@ExceptionHandler(TaskNotFoundException.class)
+    public ResponseEntity<String> handleTaskNotFound(TaskNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
 }
