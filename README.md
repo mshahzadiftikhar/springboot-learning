@@ -101,3 +101,27 @@ Spring Boot Actuator provides production-ready features to help you monitor and 
    | `/actuator/beans`    | List of Spring beans in the app              |
    | `/actuator/mappings` | All HTTP endpoint mappings                   |
    | `/actuator/loggers`  | View or modify logging levels at runtime     |
+
+## Swagger Documentation  
+Swagger helps you document, visualize, and test your REST APIs through an interactive UI.
+- Add dependency in pom.xml file
+   ```
+   <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+   </dependency>
+   ```
+   Swagger documentation will be available at: http://localhost:8080/swagger-ui/index.html
+ - Annotations:
+     - `@Tag`: Specified at the top of controller to define a section in html page. By default, controller name is used. Example: 
+         ```
+         @Tag(name = "Task Controller", description = "Controller for managing tasks")
+         ```
+     - `@Operation`: Explains each http request method with summary and description parameters
+         ```
+         @Operation(summary = "Get all tasks", description = "Returns a list of all tasks")
+         ```
+ - For disabling swagger documentation from application.properties file, normally done in production env
+   ```
+   springdoc.api-docs.enabled=false
+   ```
