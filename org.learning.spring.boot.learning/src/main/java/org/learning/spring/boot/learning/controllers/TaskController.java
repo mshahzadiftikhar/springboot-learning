@@ -9,6 +9,7 @@ import org.learning.spring.boot.learning.dto.PutTaskDTO;
 import org.learning.spring.boot.learning.dto.ResponseTaskDTO;
 import org.learning.spring.boot.learning.jpa.Task;
 import org.learning.spring.boot.learning.services.TaskService;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,6 +33,8 @@ public class TaskController {
 	@Autowired
 	TaskService taskService;
 
+	Logger logger = org.slf4j.LoggerFactory.getLogger(TaskController.class);
+
 	@GetMapping("/hello")
 	public String getHelloWorld() {
 		return taskService.getHelloWorld();
@@ -40,6 +43,7 @@ public class TaskController {
 	@GetMapping("allTasks")
 	@Operation(summary = "Get all tasks", description = "Returns a list of all tasks")
 	public List<Task> getAlltasks() {
+		logger.info("Fetching all tasks");
 		return taskService.getAllTasks();
 	}
 
