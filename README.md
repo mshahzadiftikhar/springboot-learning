@@ -148,3 +148,43 @@ Swagger helps you document, visualize, and test your REST APIs through an intera
    - Create a class for global exception handling: [GlobalExceptionHandler](org.learning.spring.boot.learning/src/main/java/org/learning/spring/boot/learning/exceptions/GlobalExceptionHandler.java)
     - `@ControllerAdvice` annotation defines that this class is global exception
     - Its a more cleaner way to group all exception handling at one place
+
+## Profiles
+
+Spring Profiles provide a way to segregate parts of your application configuration and make it only available in certain environments (like `dev`, `test`, `prod`).
+
+---
+
+### Why Use Profiles?
+
+- Separate configurations for different environments  
+- Avoid hardcoding environment-specific values  
+- Conditionally load beans  
+- Simplify deployment and testing  
+
+---
+
+### Profile-Specific Property Files
+
+Spring Boot automatically loads `application-<profile>.properties` based on the active profile.
+
+Example files:
+- `application.properties` — base config
+- `application-dev.properties` — for development
+- `application-test.properties` — for testing
+- `application-prod.properties` — for production
+
+---
+
+### Activating a Profile
+
+ - Via Environment Variable (Recommended)
+   ```bash
+   export SPRING_PROFILES_ACTIVE=dev     # Linux/macOS
+   set SPRING_PROFILES_ACTIVE=dev        # Windows CMD
+   ```
+ - Via CLI
+   ```
+   java -jar myapp.jar --spring.profiles.active=dev
+   ```
+ - You can env variables in your preferred IDE as well if you are in development phase. 
