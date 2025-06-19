@@ -74,6 +74,10 @@ We can write a CICD file that automatically build, test and deploy our spring bo
   - File extension should be yaml or yml. Name can be any and there can be multiple files, each independent of each other. We can write seperate files for build, test and deploy stages. 
   - For reference see: [ci-cd.yaml](.github/workflows/ci-cd.yml) 
 
+## Testing
+Spring Boot provides powerful support for unit testing and integration testing. It used Junit for assertions and Mockito for moking.  
+For details see: [Testing in Spring Boot](docs/testing.md)
+
  ## Spring Boot Actuator
 
 Spring Boot Actuator provides production-ready features to help you monitor and manage your application via REST endpoints.
