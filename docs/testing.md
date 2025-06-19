@@ -13,3 +13,12 @@
  - Mock dependencies (e.g., repository, external APIs).
  - Focus on inputs and outputs, not the wiring or environment.
  - Fast and deterministic tests.
+ - Annotation used:
+    | Annotation                            | Purpose                                   |
+    | ------------------------------------- | ----------------------------------------- |
+    | `@ExtendWith(MockitoExtension.class)` | Enables Mockito in JUnit 5                |
+    | `@Mock`                               | Creates a mock object                     |
+    | `@InjectMocks`                        | Injects mocks into the class being tested |
+    | `@BeforeEach`                         | Method to set up test data                |
+    | `@Test`                               | Denotes a test method                     |
+  - See this for examples: [TestTaskService](../org.learning.spring.boot.learning/src/test/java/org/learning/services/TestTaskService.java)
