@@ -67,6 +67,13 @@ All http requests are handled by the controllers. Service acts as a layer betwee
 
  Lets looks at details of each HTTP Request: GET, POST, DELETE, PUT, PATCH: [HTTP Requests](./docs/http-requests.md)
 
+
+## CICD  - GitHub Actions 
+We can write a CICD file that automatically build, test and deploy our spring boot application using github actions feature.
+  - We need to place all files for the github actions under .github/workflows folder
+  - File extension should be yaml or yml. Name can be any and there can be multiple files, each independent of each other. We can write seperate files for build, test and deploy stages. 
+  - For reference see: [ci-cd.yaml](.github/workflows/ci-cd.yml) 
+
  ## Spring Boot Actuator
 
 Spring Boot Actuator provides production-ready features to help you monitor and manage your application via REST endpoints.
