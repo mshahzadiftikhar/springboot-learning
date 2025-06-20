@@ -1,4 +1,4 @@
-package org.learning.services;
+package org.learning.spring.boot.learning.services;
 
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.learning.spring.boot.learning.jpa.Task;
 import org.learning.spring.boot.learning.jpa.TaskRepository;
-import org.learning.spring.boot.learning.services.TaskService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;

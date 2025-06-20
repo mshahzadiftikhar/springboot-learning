@@ -9,6 +9,8 @@
 
 
 ## Unit Testing
+
+### Testing Service Layer
  - Test business logic in isolation (usually the service layer).
  - Mock dependencies (e.g., repository, external APIs).
  - Focus on inputs and outputs, not the wiring or environment.
@@ -21,4 +23,12 @@
     | `@InjectMocks`                        | Injects mocks into the class being tested |
     | `@BeforeEach`                         | Method to set up test data                |
     | `@Test`                               | Denotes a test method                     |
-  - See this for examples: [TestTaskService](../org.learning.spring.boot.learning/src/test/java/org/learning/services/TestTaskService.java)
+  - See this for examples: [TestTaskService](../org.learning.spring.boot.learning/src/test/java/org/learning/spring/boot/learning/services/TestTaskService.java)
+
+  ### Testing Controller Layer
+   - Refrence: [TestTaskController](../org.learning.spring.boot.learning/src/test/java/org/learning/spring/boot/learning/controllers/TestTaskController.java)
+    - Annotations:  
+        | Annotation                            | Purpose                                   |
+        | ------------------------------------- | ----------------------------------------- |
+        | `@WebMvcTest` | Loads only MVC components (controller layer)                |
+        | `@MockitoBean`                               | Replaces a Spring bean with a Mockito mock                     |
