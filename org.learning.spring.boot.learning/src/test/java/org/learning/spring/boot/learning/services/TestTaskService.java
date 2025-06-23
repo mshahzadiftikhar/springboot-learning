@@ -22,7 +22,6 @@ public class TestTaskService {
 
     @Mock
     private TaskRepository taskRepository;
-
     private Task task;
 
     @BeforeEach
